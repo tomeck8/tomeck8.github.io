@@ -1,7 +1,7 @@
 ---
-title: Landing
+title: Contact
 layout: landing
-description: 'Landing'
+description: ''
 nav-menu: false
 show_tile: false
 ---
