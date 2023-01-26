@@ -38,8 +38,5 @@ socials:
 #sass:
 #  style: compressed
 
-# exclude:
-# - "*.gemspec"
-# - LICENSE.md
-# - CONTRIBUTING.md
-# - README.md 
+exclude:
+- README.md 
