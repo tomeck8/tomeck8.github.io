@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About Me
-image: assets/images/mathematics.jpeg
+image: assets/images/running.jpeg
 nav-menu: true
 ---
 
