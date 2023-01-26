@@ -1,5 +1,5 @@
 ---
-title: Landing
+title: Contact
 layout: landing
 description:
 nav-menu: false
