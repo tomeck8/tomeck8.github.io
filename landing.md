@@ -1,7 +1,7 @@
 ---
 title: Contact
 layout: landing
-description: ''
+description: 'Open for feedback, questions and discussions :)'
 nav-menu: false
 show_tile: false
 ---
