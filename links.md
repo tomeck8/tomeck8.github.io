@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Blog
+title: Links
 image: assets/images/mathematics.jpeg
 nav-menu: true
 ---
