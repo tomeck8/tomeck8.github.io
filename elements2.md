@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Elements
+title: Elements 2s
 image: assets/images/mathematics.jpeg
 nav-menu: true
 ---
