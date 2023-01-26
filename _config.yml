@@ -1,2 +1,15 @@
 remote_theme: andrewbanchich/forty-jekyll-theme
+
+title: Tom @ Data Science
+subtitle: A blog
 email: tom.ecker@vodafone.com
+description: blablabla
+baseurl: "/tomeck8.github.io" # the subpath of your site, e.g. /blog
+url: # the base hostname & protocol for your site
+author: Tom Ecker
+street_address: 1234 Somewhere Road
+city: Düsseldorf
+state: NRW
+zip_code: 55555
+country: Germany
+phone: 123456
