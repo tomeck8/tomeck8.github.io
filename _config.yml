@@ -33,13 +33,13 @@ socials:
   Slack:
 
 # build settings
-markdown: kramdown
+# markdown: kramdown
 
-sass:
-  style: compressed
+#sass:
+#  style: compressed
 
-exclude:
-- "*.gemspec"
-- LICENSE.md
-- CONTRIBUTING.md
-- README.md 
+# exclude:
+# - "*.gemspec"
+# - LICENSE.md
+# - CONTRIBUTING.md
+# - README.md 
