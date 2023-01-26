@@ -46,7 +46,7 @@ nav-menu: true
 				</header>
 				<p>Description 1</p>
 				<ul class="actions">
-					<li><a href="generic.html" class="button">Learn more</a></li>
+					<li><a href="post.html" class="button">Learn more</a></li>
 				</ul>
 			</div>
 		</div>
@@ -63,7 +63,7 @@ nav-menu: true
 				</header>
 				<p>Description 2</p>
 				<ul class="actions">
-					<li><a href="generic.html" class="button">Learn more</a></li>
+					<li><a href="post.html" class="button">Learn more</a></li>
 				</ul>
 			</div>
 		</div>
