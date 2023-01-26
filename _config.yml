@@ -3,7 +3,7 @@ remote_theme: andrewbanchich/forty-jekyll-theme
 title: (A)I am Tom
 subtitle: Data Science
 email: tom.ecker@vodafone.com
-description: This is me blogging about DS & AI (in this order, for real, do not try to change it.)
+description: This is me blogging about DS & AI <br />(in this order, for real, do not try to change it.)
 # baseurl: "/tomeck8.github.io" # the subpath of your site, e.g. /blog
 url: # the base hostname & protocol for your site
 author: Tom Ecker
