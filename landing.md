@@ -1,6 +1,6 @@
 ---
 title: Contact
-layout: landing
+layout: page
 description:
 nav-menu: false
 show_tile: false
