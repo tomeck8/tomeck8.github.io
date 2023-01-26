@@ -4,7 +4,7 @@ title: Tom in Data Science
 subtitle: A blog
 email: tom.ecker@vodafone.com
 description: blablabla
-baseurl: "/tomeck8.github.io" # the subpath of your site, e.g. /blog
+# baseurl: "/tomeck8.github.io" # the subpath of your site, e.g. /blog
 url: # the base hostname & protocol for your site
 author: Tom Ecker
 street_address: 1234 Somewhere Road
