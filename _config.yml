@@ -38,5 +38,4 @@ socials:
 #sass:
 #  style: compressed
 
-exclude:
-- README.md 
+exclude: README.md 
