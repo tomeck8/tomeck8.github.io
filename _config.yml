@@ -1,6 +1,6 @@
 remote_theme: andrewbanchich/forty-jekyll-theme
 
-title: AI 
+title: (A)I 
 subtitle: am Tom
 email: tom.ecker@vodafone.com
 description: This is me blogging about DS & AI <br />(in this order, for real, do not try to change it.)
@@ -26,7 +26,7 @@ socials:
   GitHub: https://github.com/tomeck8
   GitLab:
   Google-Plus: 
-  Instagram:
+  Instagram: https://www.instagram.com/tomeck8/
   LinkedIn: https://www.linkedin.com/in/tom-ecker
   Twitter: 
   Facebook:
