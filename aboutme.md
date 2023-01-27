@@ -15,5 +15,5 @@ The main topics in this blog will be AI, but I will also write about other thing
 
 Hope you enjoy some of my posts!
 
-Cheers
+Cheers <br>
 Tom
