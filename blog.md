@@ -37,7 +37,6 @@ nav-menu: true
 			</div>
 		</div>
 	</section>
-	
 	<section>
 		<a href="generic.html" class="image">
 			<img src="{% link assets/images/mathematics.jpeg %}" alt="" data-position="top center" />
