@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title: Links
 description: Links to other blogposts, articles and videos
 image: assets/images/links.jpeg
