@@ -22,7 +22,7 @@ nav-menu: true
 <!-- Two -->
 <section id="two" class="spotlights">
 	<section>
-		<a href="post.html" class="image">
+		<a href="blogposts/attention.html" class="image">
 			<img src="{% link assets/images/mathematics.jpeg %}" alt="" data-position="center center" />
 		</a>
 		<div class="content">
@@ -38,7 +38,7 @@ nav-menu: true
 		</div>
 	</section>
 	<section>
-		<a href="post.html" class="image">
+		<a href="blogposts/attention.html" class="image">
 			<img src="{% link assets/images/mathematics.jpeg %}" alt="" data-position="top center" />
 		</a>
 		<div class="content">
