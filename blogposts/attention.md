@@ -22,15 +22,14 @@ There are other embeddings that do not translate single letters to an integer, b
 Important note: Choosing between a letter-by-letter encoding and a sentence-piece encoding results in a trade-off between the length of translations of the text and a larger vocabulary.
 
 
-'''python
+```python
 class Model(nn.Module):
   def __init__(self):
     token_embedding_table = nn.Embedding(vocab_size, n_embd)
   
   def forward(self, input, targets):
     tok_emb = self.token_embedding_table(input)
-  
-'''
+```
 
 
 ## Positional Encoding
