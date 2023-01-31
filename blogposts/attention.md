@@ -54,18 +54,96 @@ class Model(nn.Module):
 Besides the token identitiy, the Transformer uses a second embedding: the tokens positional encoding.
 
 ## Positional Encoding
+To not only take the token identity into account, but also the position of the token, we introduce the position embedding table.
+Therefore, let's look at one more thing: Whenever you feed the input text you want to train on into the model, it won't train on the complete text at once, but take smaller blocks of text out of the text one after the other. These blocks of text are referred to as the _context_ and usually have a fixed length of letters, which we'll call block_size.
 
+```python
+class Model(nn.Module):
+  def __init__(self):
+    token_embedding_table = nn.Embedding(vocab_size, n_embd)
+    position_embedding_table = nn.Embedding(block_size, n_embd)
+  
+  def forward(self, input, targets):
+    tok_emb = token_embedding_table(input)
+    pos_emb = position_embedding_table(torch.arange(T))
+    x = tok_emb + pos_emb
+```
+
+So now at this point, x contains both information about the token identity and the position.
+
+## Linear
+Let's see how we can get an interpretable output out of this. Therefore, we add a fully connected linear layer to the model with output of size vocab_size, to give us a score for each letter in our vocabulary.
+
+```python
+class Model(nn.Module):
+  def __init__(self):
+    token_embedding_table = nn.Embedding(vocab_size, n_embd)
+    position_embedding_table = nn.Embedding(block_size, n_embd)
+    fc = nn.Linear(n_embd, vocab_size)
+  
+  def forward(self, input, targets):
+    tok_emb = token_embedding_table(input)
+    pos_emb = position_embedding_table(torch.arange(T))
+    x = tok_emb + pos_emb
+    logits = fc(x)
+```
 
 
 ## Attention
+Now we get to the part that made the revolutionary ChatGPT possible in the first place: Attention!
+Other models such as RNNs or LSTMs have one problem: their recurrent calculations are not parallelizable. Attention solves this issue and offers a high degree of distributed computing - using matrix multiplication.
+
+When the model should produce text, in each step we want to predict the next letter based on the context. Here, context could refer to the complete block of letters, but effectively, we can only access the letters that came before the current one. Let me give you an example:
+Imagine we have a block of letters "Hi Tom" (block_size = 6). The model would generate learnings iteratively:
+
+| Context      | Target       |
+| -----------  | -----------  |
+| "H"          | "i"          |
+| "Hi"         | " "          |
+| "Hi "        | "T"          |
+| "Hi T"       | "o"          |
+| "Hi To"      | "m"          |
+
+After the first step, the model has more than one input letter in the context. The goal of attention is to weigh the importance of each preceding letter. Let's look at the last iteration: The context is "Hi To" and consists of 5 letters. The easiest thing would be to give each letter the weight of 0.2 (so that the weights add up to one).
+In preparation for attention we can do it like this for all 5 iterations:
+
+```python
+block_size = 5
+
+tril = torch.tril(torch.ones(block_size, block_size))   # lower triangular matrix of ones
+wei = torch.zeros(block_size, block_size)
+wei = wei.masked_fill(tril == 0, float('-inf'))
+wei = F.softmax(wei, dim=1)
+
+print(wei)
+>>> tensor([[1.0000, 0.0000, 0.0000, 0.0000, 0.0000],
+            [0.5000, 0.5000, 0.0000, 0.0000, 0.0000],
+            [0.3333, 0.3333, 0.3333, 0.0000, 0.0000],
+            [0.2500, 0.2500, 0.2500, 0.2500, 0.0000],
+            [0.2000, 0.2000, 0.2000, 0.2000, 0.2000]])
+```
+
+
+
+
+For the sake of an example let's say x is the intermediate result from above code snippet.
+
+```python
+x = torch.randn()
+tril = torch.tril(torch.ones(block_size, block_size))
+wei = torch.zeros(block_size, block_size)
+wei = wei.masked_fill(tril == 0, float('-inf'))
+wei = F.softmax(wei, dim=1)
+out = wei@x                     # @ is matrix multiplication
+```
+
+
 
 ### Multi-Head Attention
 
 ## Add + Norm
 
 ## Feed Forward
-
-## Linear
 
 ## Softmax
 
