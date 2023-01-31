@@ -11,9 +11,8 @@ In easy terms, a Generatively Pretrained Transformer (GPT) is a language model t
 
 ## The overall picture
 
-Solarized dark             |  Solarized Ocean
-:-------------------------:|:-------------------------:
-<img src="/assets/images/Transformer_Architecture.png" width="300">  | The picture shows the model architecture of the transformer. It looks really complicated, so we'll break it up into understandable pieces.
+<img src="/assets/images/Transformer_Architecture.png" width="300">{: style="float: left"} 
+The picture shows the model architecture of the transformer. It looks really complicated, so we'll break it up into understandable pieces.
 Firstly, let's split the picture into the left and right side. The left side of the model is the part that takes a user input, e.g. in ChatGPT a question that you type in, and helps the model understand your question. The right side of the model is the part that makes the model produce text and that's what we'll be focussing on in this post.
 So let's reduce the image to our scope.
 
