@@ -187,7 +187,7 @@ class Model(nn.Module):
 
 AttentionHead             |  Multihead Attention
 :-------------------------:|:-------------------------:
-![](/assets/images/AttentionHead.jpeg)  |  ![](/assets/images/MultiHeadAttention.jpeg)
+![](/assets/images/AttentionHead.jpg)  |  ![](/assets/images/MultiHeadAttention.jpg)
 
 
 ### Multi-Head Attention
