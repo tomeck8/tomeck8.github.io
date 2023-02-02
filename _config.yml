@@ -32,14 +32,13 @@ socials:
   Facebook:
   Slack:
   
-# Conversion
-markdown:    kramdown
-
-# Markdown Processors
+markdown: kramdown
+highlighter: rouge
 kramdown:
   input: GFM
-  auto_ids: true
-  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: html
+    css_class   : 'syntax'
 
 #sass:
 #  style: compressed
