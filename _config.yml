@@ -31,9 +31,16 @@ socials:
   Twitter: 
   Facebook:
   Slack:
+  
+# Conversion
+markdown:    kramdown
+highlighter: rouge
 
-# build settings
-# markdown: kramdown
+# Markdown Processors
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
 
 #sass:
 #  style: compressed
