@@ -32,13 +32,10 @@ socials:
   Facebook:
   Slack:
   
-markdown: kramdown
-highlighter: rouge
-kramdown:
-  input: GFM
-  syntax_highlighter_opts:
-    default_lang: html
-    css_class   : 'syntax'
+#_config.yml
+markdown: redcarpet
+redcarpet:
+  extensions: ["tables", "fenced_code_blocks"]
 
 #sass:
 #  style: compressed
