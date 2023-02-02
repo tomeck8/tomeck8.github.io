@@ -168,7 +168,7 @@ class AttentionHead(nn.Module):
 And that's it. We created a single attention head. Now we can insert it into our model.
 
 
-{% highlight python %}
+```python
 class Model(nn.Module):
   def __init__(self):
     token_embedding_table = nn.Embedding(vocab_size, n_embd)
@@ -182,7 +182,13 @@ class Model(nn.Module):
     x = tok_emb + pos_emb
     x = attention_head(x)
     logits = fc(x)
-{% endhighlight %}
+```
+
+
+AttentionHead             |  Multihead Attention
+:-------------------------:|:-------------------------:
+![](/assets/images/AttentionHead.jpeg)  |  ![](/assets/images/MultiHeadAttention.jpeg)
+
 
 ### Multi-Head Attention
 
