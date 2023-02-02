@@ -1,344 +1,329 @@
-///
-/// Forty by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-///
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@tomeck8 
+jekyll
+/
+minima
+Public
+Fork your own copy of jekyll/minima
+Code
+Issues
+7
+Pull requests
+20
+Actions
+Projects
+Security
+Insights
+minima/_sass/minima/_base.scss
+@ntkme
+ntkme Fix deprecation warnings (#700)
+…
+Latest commit 21b4274 on Dec 26, 2022
+ History
+ 14 contributors
+@ashmaroli@hszhakka@domingohui@zlatanvasovic@jekyllbot@DirtyF@Strangehill@intern0t@sandervoerman@parkr@mmktomato@ntkme
+281 lines (222 sloc)  3.93 KB
 
-/* Type */
+html {
+  font-size: $base-font-size;
+}
 
-	body, input, select, textarea {
-		color: _palette(fg);
-		font-family: _font(family);
-		font-size: 17pt;
-		font-weight: _font(weight);
-		letter-spacing: _font(letter-spacing);
-		line-height: 1.65;
+/**
+ * Reset some basic elements
+ */
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+  margin: 0;
+  padding: 0;
 
-		@include breakpoint(xlarge) {
-			font-size: 14pt;
-		}
+}
 
-		@include breakpoint(large) {
-			font-size: 12pt;
-		}
 
-		@include breakpoint(xxsmall) {
-			font-size: 11pt;
-		}
-	}
 
-	a {
-		@include vendor('transition', (
-			'color #{_duration(transition)} ease-in-out',
-			'border-bottom-color #{_duration(transition)} ease-in-out'
-		));
-		border-bottom: dotted 1px;
-		color: inherit;
-		text-decoration: none;
+/**
+ * Basic styling
+ */
+body {
+  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+  color: $text-color;
+  background-color: $background-color;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+     -moz-font-feature-settings: "kern" 1;
+       -o-font-feature-settings: "kern" 1;
+          font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  overflow-wrap: break-word;
+}
 
-		&:hover {
-			border-bottom-color: transparent;
-			color: _palette(highlight) !important;
-		}
 
-		&:active {
-			color: desaturate(darken(_palette(highlight), 15), 5) !important;
-		}
-	}
 
-	strong, b {
-		color: _palette(fg-bold);
-		font-weight: _font(weight-bold);
-	}
+/**
+ * Set `margin-bottom` to maintain vertical rhythm
+ */
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure,
+%vertical-rhythm {
+  margin-bottom: $spacing-unit * .5;
+}
 
-	em, i {
-		font-style: italic;
-	}
+hr {
+  margin-top: $spacing-unit;
+  margin-bottom: $spacing-unit;
+}
 
-	p {
-		margin: 0 0 _size(element-margin) 0;
-	}
+/**
+ * `main` element
+ */
+main {
+  display: block; /* Default value of `display` of `main` element is 'inline' in IE 11. */
+}
 
-	blockquote > p {
-		margin: 0;
-	}
 
-	h1, h2, h3, h4, h5, h6 {
-		color: _palette(fg-bold);
-		font-weight: _font(weight-bold);
-		line-height: 1.65;
-		margin: 0 0 (_size(element-margin) * 0.5) 0;
 
-		a {
-			color: inherit;
-			border-bottom: 0;
-		}
-	}
+/**
+ * Images
+ */
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
 
-	h1 {
-		font-size: 2.5em;
-	}
 
-	h2 {
-		font-size: 1.75em;
-	}
 
-	h3 {
-		font-size: 1.35em;
-	}
+/**
+ * Figures
+ */
+figure > img {
+  display: block;
+}
 
-	h4 {
-		font-size: 1.1em;
-	}
+figcaption {
+  font-size: $small-font-size;
+}
 
-	h5 {
-		font-size: 0.9em;
-	}
 
-	h6 {
-		font-size: 0.7em;
-	}
 
-	@include breakpoint(small) {
-		h1 {
-			font-size: 2em;
-		}
+/**
+ * Lists
+ */
+ul, ol {
+  margin-left: $spacing-unit;
+}
 
-		h2 {
-			font-size: 1.5em;
-		}
+li {
+  > ul,
+  > ol {
+    margin-bottom: 0;
+  }
+}
 
-		h3 {
-			font-size: 1.25em;
-		}
-	}
 
-	sub {
-		font-size: 0.8em;
-		position: relative;
-		top: 0.5em;
-	}
 
-	sup {
-		font-size: 0.8em;
-		position: relative;
-		top: -0.5em;
-	}
+/**
+ * Headings
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $base-font-weight;
+}
 
-	blockquote {
-		border-left: solid 4px _palette(border);
-		font-style: italic;
-		margin: 0 0 _size(element-margin) 0;
-		padding: (_size(element-margin) / 4) 0 (_size(element-margin) / 4) _size(element-margin);
-	}
 
-code, pre {
-  font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-  color:#333;
+
+/**
+ * Links
+ */
+a {
+  color: $link-base-color;
+  text-decoration: none;
+
+  &:visited {
+    color: $link-visited-color;
+  }
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+
+  .social-media-list &:hover {
+    text-decoration: none;
+
+    .username {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  color: $brand-color;
+  border-left: 4px solid $border-color-01;
+  padding-left: $spacing-unit * .5;
+  @include relative-font-size(1.125);
+  font-style: italic;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  i, em {
+    font-style: normal;
+  }
+}
+
+
+
+/**
+ * Code formatting
+ */
+pre,
+code {
+  font-family: $code-font-family;
+  font-size: 0.9375em;
+  border: 1px solid $border-color-01;
+  border-radius: 3px;
+  background-color: $code-background-color;
+}
+
+code {
+  padding: 1px 5px;
 }
 
 pre {
-  padding:8px 15px;
-  background: #f8f8f8;
-  border-radius:5px;
-  border:1px solid #e5e5e5;
+  padding: 8px 12px;
   overflow-x: auto;
+
+  > code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
-	hr {
-		border: 0;
-		border-bottom: solid 1px _palette(border);
-		margin: _size(element-margin) 0;
+.highlight {
+  border-radius: 3px;
+  background: $code-background-color;
+  @extend %vertical-rhythm;
 
-		&.major {
-			margin: (_size(element-margin) * 1.5) 0;
-		}///
-/// Forty by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-///
+  .highlighter-rouge & {
+    background: $code-background-color;
+  }
+}
 
-/* Type */
 
-	body, input, select, textarea {
-		color: _palette(fg);
-		font-family: _font(family);
-		font-size: 17pt;
-		font-weight: _font(weight);
-		letter-spacing: _font(letter-spacing);
-		line-height: 1.65;
 
-		@include breakpoint(xlarge) {
-			font-size: 14pt;
-		}
+/**
+ * Wrapper
+ */
+.wrapper {
+  max-width: calc(#{$content-width} - (#{$spacing-unit}));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $spacing-unit * .5;
+  padding-left: $spacing-unit * .5;
+  @extend %clearfix;
 
-		@include breakpoint(large) {
-			font-size: 12pt;
-		}
+  @media screen and (min-width: $on-large) {
+    max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
+    padding-right: $spacing-unit;
+    padding-left: $spacing-unit;
+  }
+}
 
-		@include breakpoint(xxsmall) {
-			font-size: 11pt;
-		}
-	}
 
-	a {
-		@include vendor('transition', (
-			'color #{_duration(transition)} ease-in-out',
-			'border-bottom-color #{_duration(transition)} ease-in-out'
-		));
-		border-bottom: dotted 1px;
-		color: inherit;
-		text-decoration: none;
 
-		&:hover {
-			border-bottom-color: transparent;
-			color: _palette(highlight) !important;
-		}
+/**
+ * Clearfix
+ */
+%clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
-		&:active {
-			color: desaturate(darken(_palette(highlight), 15), 5) !important;
-		}
-	}
 
-	strong, b {
-		color: _palette(fg-bold);
-		font-weight: _font(weight-bold);
-	}
 
-	em, i {
-		font-style: italic;
-	}
+/**
+ * Icons
+ */
 
-	p {
-		margin: 0 0 _size(element-margin) 0;
-	}
+.orange {
+  color: #f66a0a;
+}
 
-	blockquote > p {
-		margin: 0;
-	}
+.grey {
+  color: #828282;
+}
 
-	h1, h2, h3, h4, h5, h6 {
-		color: _palette(fg-bold);
-		font-weight: _font(weight-bold);
-		line-height: 1.65;
-		margin: 0 0 (_size(element-margin) * 0.5) 0;
+.svg-icon {
+  width: 1.25em;
+  height: 1.25em;
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
 
-		a {
-			color: inherit;
-			border-bottom: 0;
-		}
-	}
 
-	h1 {
-		font-size: 2.5em;
-	}
+/**
+ * Tables
+ */
+table {
+  margin-bottom: $spacing-unit;
+  width: 100%;
+  text-align: $table-text-align;
+  color: $table-text-color;
+  border-collapse: collapse;
+  border: 1px solid $table-border-color;
+  tr {
+    &:nth-child(even) {
+      background-color: $table-zebra-color;
+    }
+  }
+  th, td {
+    padding: ($spacing-unit * 33.3333333333 * .01) ($spacing-unit * .5);
+  }
+  th {
+    background-color: $table-header-bg-color;
+    border: 1px solid $table-header-border;
+  }
+  td {
+    border: 1px solid $table-border-color;
+  }
 
-	h2 {
-		font-size: 1.75em;
-	}
-
-	h3 {
-		font-size: 1.35em;
-	}
-
-	h4 {
-		font-size: 1.1em;
-	}
-
-	h5 {
-		font-size: 0.9em;
-	}
-
-	h6 {
-		font-size: 0.7em;
-	}
-
-	@include breakpoint(small) {
-		h1 {
-			font-size: 2em;
-		}
-
-		h2 {
-			font-size: 1.5em;
-		}
-
-		h3 {
-			font-size: 1.25em;
-		}
-	}
-
-	sub {
-		font-size: 0.8em;
-		position: relative;
-		top: 0.5em;
-	}
-
-	sup {
-		font-size: 0.8em;
-		position: relative;
-		top: -0.5em;
-	}
-
-	blockquote {
-		border-left: solid 4px _palette(border);
-		font-style: italic;
-		margin: 0 0 _size(element-margin) 0;
-		padding: (_size(element-margin) / 4) 0 (_size(element-margin) / 4) _size(element-margin);
-	}
-
-	code {
-		background: _palette(white);
-		font-family: _font(family-fixed);
-		font-size: 0.9em;
-		margin: 0 0.25em;
-		padding: 0.25em 0.65em;
-	}
-
-	pre {
-		-webkit-overflow-scrolling: touch;
-		font-family: _font(family-fixed);
-		font-size: 0.9em;
-		margin: 0 0 _size(element-margin) 0;
-
-		code {
-			display: block;
-			line-height: 1.75;
-			padding: 1em 1.5em;
-			overflow-x: auto;
-		}
-	}
-
-	hr {
-		border: 0;
-		border-bottom: solid 1px _palette(border);
-		margin: _size(element-margin) 0;
-
-		&.major {
-			margin: (_size(element-margin) * 1.5) 0;
-		}
-	}
-
-	.align-left {
-		text-align: left;
-	}
-
-	.align-center {
-		text-align: center;
-	}
-
-	.align-right {
-		text-align: right;
-	}
-	}
-
-	.align-left {
-		text-align: left;
-	}
-
-	.align-center {
-		text-align: center;
-	}
-
-	.align-right {
-		text-align: right;
-	}
+  @include media-query($on-laptop) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+}
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+minima/_base.scss at master · jekyll/minima
