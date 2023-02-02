@@ -96,13 +96,11 @@ Other models such as RNNs or LSTMs have one problem: their recurrent calculation
 When the model should produce text, in each step we want to predict the next letter based on the context. Here, context could refer to the complete block of letters, but effectively, we can only access the letters that came before the current one. Let me give you an example:
 Imagine we have a block of letters "Hi Tom" (block_size = 6). The model would generate learnings iteratively:
 
-| Context      | Target       |
-| -----------  | -----------  |
-| "H"          | "i"          |
-| "Hi"         | " "          |
-| "Hi "        | "T"          |
-| "Hi T"       | "o"          |
-| "Hi To"      | "m"          |
+1. Context: "H";     Target "i"
+2. Context: "Hi";    Target " "
+3. Context: "Hi ";   Target "T"
+4. Context: "Hi T";  Target "o"
+5. Context: "Hi To"; Target "m"
 
 After the first step, the model has more than one input letter in the context. The goal of attention is to weigh the importance of each preceding letter. Let's look at the last iteration: The context is "Hi To" and consists of 5 letters. The easiest thing would be to give each letter the weight of 0.2 (so that the weights add up to one).
 In preparation for attention we can do it like this for all 5 iterations:
@@ -123,13 +121,9 @@ print(wei)
             [0.2000, 0.2000, 0.2000, 0.2000, 0.2000]])
 ```
 
-
-
-
 For the sake of an example let's say x is the intermediate result from above code snippet.
 
 ```python
-x = torch.randn()
 tril = torch.tril(torch.ones(block_size, block_size))
 wei = torch.zeros(block_size, block_size)
 wei = wei.masked_fill(tril == 0, float('-inf'))
@@ -137,7 +131,58 @@ wei = F.softmax(wei, dim=1)
 out = wei@x                     # @ is matrix multiplication
 ```
 
+So now we restricted the influence of the letter to be predicted on the letters that came before the current target. Also, we weighted each of those letters to be equally important for the current target.
+In reality, we do not want all letters in the context to be equally important but we want the weights to be data driven.
+This is the last step we need to do before we get to attention as it is used in Transformers.
 
+We will introduce 3 more vectors and their functions are usually described as follows: 
+Key K: "What kind of information do I offer for other positions?"
+Query Q: "What kind of information am I looking for in other positions?"
+Value V: "I don't have a fancy interpretation! :("
+
+The values of these vectors are nothing more the result of an linear activation of the intermediate result x. Through the multiplication of key and query, the different positions can communicate with one another and result in higher values (indicating higher importance for one another) or lower values (less importance).
+So, let's write a class for an attention head and add it to our model.
+
+```python
+class AttentionHead(nn.Module):
+  def __init__(self, head_size):
+    self.key = nn.Linear(n_embd, head_size, bias=False)
+    self.query = nn.Linear(n_embd, head_size, bias=False)
+    self.value = nn.Linear(n_embd, head_size, bias=False)
+    self.register_buffer('tril', torch.tril(torch.ones(block_size, block_size))
+  
+  def forward():
+    k = self.key(x)
+    q = self.query(x)
+    v = self.value(x)
+    
+    wei = q@k.transpose()
+    wei = wei.masked_fill(self.tril == 0, float('-inf')))
+    wei = F.softmax(wei, dim=1)
+    
+    out = wei@v
+    
+    return out
+```
+
+And that's it. We created a single attention head. Now we can insert it into our model.
+
+
+```python
+class Model(nn.Module):
+  def __init__(self):
+    token_embedding_table = nn.Embedding(vocab_size, n_embd)
+    position_embedding_table = nn.Embedding(block_size, n_embd)
+    fc = nn.Linear(n_embd, vocab_size)
+    attention_head = Head(n_embd)
+  
+  def forward(self, input, targets):
+    tok_emb = token_embedding_table(input)
+    pos_emb = position_embedding_table(torch.arange(T))
+    x = tok_emb + pos_emb
+    x = attention_head(x)
+    logits = fc(x)
+```
 
 ### Multi-Head Attention
 
