@@ -135,10 +135,12 @@ So now we restricted the influence of the letter to be predicted on the letters 
 In reality, we do not want all letters in the context to be equally important but we want the weights to be data driven.
 This is the last step we need to do before we get to attention as it is used in Transformers.
 
+
 We will introduce 3 more vectors and their functions are usually described as follows:   
-Key K: "What kind of information do I offer for other positions?"  
-Query Q: "What kind of information am I looking for in other positions?"  
-Value V: "I don't have a fancy interpretation! :(".  
+**Key K:** "What kind of information do I offer for other positions?"  
+**Query Q:** "What kind of information am I looking for in other positions?"  
+**Value V:** "I don't have a fancy interpretation! :(".  
+
 
 The values of these vectors are nothing more the result of an linear activation of the intermediate result x. Through the multiplication of key and query, the different positions can communicate with one another and result in higher values (indicating higher importance for one another) or lower values (less importance).
 So, let's write a class for an attention head and add it to our model.
@@ -184,17 +186,32 @@ class Model(nn.Module):
     logits = fc(x)
 ```
 
+As you can see in the left diagram below, we now created an attention head exactly as described in the paper "Attention is all you need". We did not go into detail with the scaling because it is really just scaling the product of Q and K by $\frac{1}{\sqrt{d}}$, d being the dimension of K.
 
-AttentionHead             |  Multihead Attention
+
+A Single Attention Head             |  Multi-head Attention
 :-------------------------:|:-------------------------:
 ![](/assets/images/AttentionHead.jpg)  |  ![](/assets/images/MultiHeadAttention.jpg)
 
 
 ### Multi-Head Attention
+In the right diagram, you can see what a multi-head attention looks like. Actually it is fairly easy. It is nothing else then `num_heads` (an integer of your choice) attention-heads which are calculated independently from one another. The results of all the attention heads are concatenated at the end and then fed into a linear layer.
 
-## Add + Norm
+
+## Residual Blocks
+Looking at the diagram at the very top of this blog, you can see that the arrows towards "Add + Norm" somewhat skip the multi-head attention. This is what we call residual blocks. As the calculation is fairly easy, but interpretation might not be, I refer to [this blog](https://towardsdatascience.com/residual-blocks-building-blocks-of-resnet-fd90ca15d6ec) for more details.
+
 
 ## Feed Forward
+The feed-forward part is a simple ReLu activation: `FFN(x) = max(0, x*W1 + b1)*W2 + b2`.
 
 ## Softmax
+The softmax function is widely used in Neural Networks. All it does is convert logit values to probabilities. Based on those probabilites, we can pick the highest and like this, choose the next predicted letter to generate more and more text.
+
+
+
+## Credits
+The sources I used to write this blog are mainly [this YouTube video from Andrej Karpathy](https://www.youtube.com/watch?v=kCc8FmEb1nY) (former AI director of Tesla), some blogs mentioned in-text, and the book "Transformers for Transformers for Natural Language Processing" by Denis Rothman.
+
+If you read until here, thansk, you're awesome! :)
 
