@@ -214,7 +214,8 @@ The softmax function is widely used in Neural Networks. All it does is convert l
 
 
 ## Credits
-The sources I used to write this blog are mainly [this YouTube video from Andrej Karpathy](https://www.youtube.com/watch?v=kCc8FmEb1nY) (former AI director of Tesla), some blogs mentioned in-text, and the book "Transformers for Transformers for Natural Language Processing" by Denis Rothman.
+The sources I used to write this blog are mainly [this YouTube video from Andrej Karpathy](https://www.youtube.com/watch?v=kCc8FmEb1nY) (former AI director of Tesla), some blogs mentioned in-text, and the book "Transformers for Transformers for Natural Language Processing" by Denis Rothman.  
+Also, there is a [Google Colab](https://github.com/karpathy/ng-video-lecture) from Karpathy's video.
 
 If you read until here, thanks, you're awesome! :)
 
