@@ -23,14 +23,14 @@ nav-menu: true
 <section id="two" class="spotlights">
 	<section>
 		<a href="blogposts/attention.html" class="image">
-			<img src="{% link assets/images/mathematics.jpeg %}" alt="" data-position="center center" />
+			<img src="{% link /assets/images/Transformer_Architecture.png %}" alt="" data-position="center center" />
 		</a>
 		<div class="content">
 			<div class="inner">
 				<header class="major">
-					<h3>Topic 1</h3>
+					<h3>How to build a GPT</h3>
 				</header>
-				<p>Description 1</p>
+				<p>GPT3 is basically the voice of ChatGPT. But what blocks and techniques does it consist of and how do they interact?</p>
 				<ul class="actions">
 					<li><a href="blogposts/attention.html" class="button">Learn more</a></li>
 				</ul>
