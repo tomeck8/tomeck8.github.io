@@ -136,9 +136,9 @@ In reality, we do not want all letters in the context to be equally important bu
 This is the last step we need to do before we get to attention as it is used in Transformers.
 
 We will introduce 3 more vectors and their functions are usually described as follows: 
-Key K: "What kind of information do I offer for other positions?"
-Query Q: "What kind of information am I looking for in other positions?"
-Value V: "I don't have a fancy interpretation! :("
+Key K: "What kind of information do I offer for other positions?"  
+Query Q: "What kind of information am I looking for in other positions?"  
+Value V: "I don't have a fancy interpretation! :(".  
 
 The values of these vectors are nothing more the result of an linear activation of the intermediate result x. Through the multiplication of key and query, the different positions can communicate with one another and result in higher values (indicating higher importance for one another) or lower values (less importance).
 So, let's write a class for an attention head and add it to our model.
