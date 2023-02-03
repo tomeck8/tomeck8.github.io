@@ -44,9 +44,9 @@ nav-menu: true
 		<div class="content">
 			<div class="inner">
 				<header class="major">
-					<h3>Topic 2</h3>
+					<h3>Next Blog</h3>
 				</header>
-				<p>Description 2</p>
+				<p>Cooming Soon</p>
 				<ul class="actions">
 					<li><a href="blogposts/attention.html" class="button">Learn more</a></li>
 				</ul>
