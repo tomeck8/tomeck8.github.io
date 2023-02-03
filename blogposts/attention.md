@@ -135,7 +135,7 @@ So now we restricted the influence of the letter to be predicted on the letters 
 In reality, we do not want all letters in the context to be equally important but we want the weights to be data driven.
 This is the last step we need to do before we get to attention as it is used in Transformers.
 
-We will introduce 3 more vectors and their functions are usually described as follows: 
+We will introduce 3 more vectors and their functions are usually described as follows:   
 Key K: "What kind of information do I offer for other positions?"  
 Query Q: "What kind of information am I looking for in other positions?"  
 Value V: "I don't have a fancy interpretation! :(".  
