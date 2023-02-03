@@ -13,7 +13,8 @@ In easy terms, a Generatively Pretrained Transformer (GPT) is a language model t
 ![image](/assets/images/Transformer_Architecture.png)
 
 The picture shows the model architecture of the transformer. It looks really complicated, so we'll break it up into understandable pieces.
-Firstly, let's split the picture into the left and right side. The left side of the model, __the Encoder__, is the part that takes a user input, e.g. in ChatGPT a question that you type in, and helps the model understand your question. The right side of the model, __the Decoder__, is the part that makes the model produce text and that's what we'll be focussing on in this post.
+Firstly, let's split the picture into the left and right side. The left side of the model, __the Encoder__, is the part that takes a user input, e.g. in ChatGPT a question that you type in, and helps the model understand your question. The right side of the model, __the Decoder__, is the part that makes the model produce text and that's what we'll be focussing on in this post.  
+So after you have gathered a lot of text data, that might be everything from Shakespeare to football live ticker text, whatever you want your GPT to sound like (kind of like a parrot), we can pass that data in and start with the first step: The embedding.
 
 ## Output Embedding 
 This is the first and easiest step. Since neural networks do not work with characters, but with numbers, we provide an numeric representation of our alphabet. We call this our vocabulary and it is nothing more than a mapping from (sequences of) letters to an integer.
