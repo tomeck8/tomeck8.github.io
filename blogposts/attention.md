@@ -58,7 +58,7 @@ Besides the token identitiy, the Transformer uses a second embedding: the tokens
 
 ## Positional Encoding
 To not only take the token identity into account, but also the position of the token, we introduce the position embedding table.  
-Therefore, let's look at one more thing: Whenever you feed the input text you want to train on into the model, it won't train on the complete text at once, but take smaller blocks of text out of the text one after the other. These blocks of text are referred to as the _context_ and usually have a fixed length of letters, which we'll call block_size.
+Therefore, let's look at one more thing: Whenever you feed the input text you want to train on into the model, it won't train on the complete text at once, but take smaller blocks of text out of the text one after the other. These blocks of text are referred to as the _context_ and usually have a fixed length of letters, which we'll call `block_size`.
 
 ```python
 class Model(nn.Module):
@@ -75,7 +75,7 @@ class Model(nn.Module):
 So now at this point, x contains both information about the token identity and the position.
 
 ## Linear
-Let's see how we can get an interpretable output out of this. Therefore, we add a fully connected linear layer to the model with output of size vocab_size, to give us a score for each letter in our vocabulary.
+Let's see how we can get an interpretable output out of this. Therefore, we add a fully connected linear layer to the model with output of size `vocab_size`, to give us a score for each letter in our vocabulary.
 
 ```python
 class Model(nn.Module):
