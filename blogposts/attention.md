@@ -13,12 +13,15 @@ In easy terms, a Generatively Pretrained Transformer (GPT) is a language model t
 ![image](/assets/images/Transformer_Architecture.png)
 
 The picture shows the model architecture of the transformer. It looks really complicated, so we'll break it up into understandable pieces.
-Firstly, let's split the picture into the left and right side. The left side of the model is the part that takes a user input, e.g. in ChatGPT a question that you type in, and helps the model understand your question. The right side of the model is the part that makes the model produce text and that's what we'll be focussing on in this post.
+Firstly, let's split the picture into the left and right side. The left side of the model, __the Encoder__, is the part that takes a user input, e.g. in ChatGPT a question that you type in, and helps the model understand your question. The right side of the model, __the Decoder__, is the part that makes the model produce text and that's what we'll be focussing on in this post.
 
 ## Output Embedding 
 This is the first and easiest step. Since neural networks do not work with characters, but with numbers, we provide an numeric representation of our alphabet. We call this our vocabulary and it is nothing more than a mapping from (sequences of) letters to an integer.
-The easiest mapping would just be assigning an integer to each letter in the alphabet. So the sequence of letters ['H', 'e', 'l', 'l', 'o'] might be translated to [0, 1, 2, 2, 3].
-There are other embeddings that do not translate single letters to an integer, but something called "Sub-words", which are pieces of words or even entire short words. For example "Hello World." could be split into [Hello][_Wor][ld][.]. An example for this would be Google's [sentencepiece](https://github.com/google/sentencepiece).
+
+The easiest mapping would just be assigning an integer to each letter in the alphabet. So the sequence of letters `['H', 'e', 'l', 'l', 'o']` might be translated to `[0, 1, 2, 2, 3]`.
+
+There are other embeddings that do not translate single letters to an integer, but something called "Sub-words", which are pieces of words or even entire short words. For example `"Hello World."` could be split into `[Hello][_Wor][ld][.]`. An example for this would be Google's [sentencepiece](https://github.com/google/sentencepiece).
+
 Important note: Choosing between a letter-by-letter encoding and a sentence-piece encoding results in a trade-off between the length of translations of the text and a larger vocabulary.
 
 A simple code on how encoding (and decoding) of single letters works:
@@ -54,7 +57,7 @@ class Model(nn.Module):
 Besides the token identitiy, the Transformer uses a second embedding: the tokens positional encoding.
 
 ## Positional Encoding
-To not only take the token identity into account, but also the position of the token, we introduce the position embedding table.
+To not only take the token identity into account, but also the position of the token, we introduce the position embedding table.  
 Therefore, let's look at one more thing: Whenever you feed the input text you want to train on into the model, it won't train on the complete text at once, but take smaller blocks of text out of the text one after the other. These blocks of text are referred to as the _context_ and usually have a fixed length of letters, which we'll call block_size.
 
 ```python
@@ -90,10 +93,10 @@ class Model(nn.Module):
 
 
 ## Attention
-Now we get to the part that made the revolutionary ChatGPT possible in the first place: Attention!
+Now we get to the part that made the revolutionary ChatGPT possible in the first place: Attention!  
 Other models such as RNNs or LSTMs have one problem: their recurrent calculations are not parallelizable. Attention solves this issue and offers a high degree of distributed computing - using matrix multiplication.
 
-When the model should produce text, in each step we want to predict the next letter based on the context. Here, context could refer to the complete block of letters, but effectively, we can only access the letters that came before the current one. Let me give you an example:
+When the model should produce text, in each step we want to predict the next letter based on the context. Here, context could refer to the complete block of letters, but effectively, we can only access the letters that came before the current one. Let me give you an example:  
 Imagine we have a block of letters "Hi Tom" (block_size = 6). The model would generate learnings iteratively:
 
 1. Context: "H";     Target "i"
@@ -102,7 +105,7 @@ Imagine we have a block of letters "Hi Tom" (block_size = 6). The model would ge
 4. Context: "Hi T";  Target "o"
 5. Context: "Hi To"; Target "m"
 
-After the first step, the model has more than one input letter in the context. The goal of attention is to weigh the importance of each preceding letter. Let's look at the last iteration: The context is "Hi To" and consists of 5 letters. The easiest thing would be to give each letter the weight of 0.2 (so that the weights add up to one).
+After the first step, the model has more than one input letter in the context. The goal of attention is to weigh the importance of each preceding letter. Let's look at the last iteration: The context is "Hi To" and consists of 5 letters. The easiest thing would be to give each letter the weight of 0.2 (so that the weights add up to one).  
 In preparation for attention we can do it like this for all 5 iterations:
 
 ```python
@@ -131,7 +134,7 @@ wei = F.softmax(wei, dim=1)
 out = wei@x                     # @ is matrix multiplication
 ```
 
-So now we restricted the influence of the letter to be predicted on the letters that came before the current target. Also, we weighted each of those letters to be equally important for the current target.
+So now we restricted the influence of the letter to be predicted on the letters that came before the current target. Also, we weighted each of those letters to be equally important for the current target.  
 In reality, we do not want all letters in the context to be equally important but we want the weights to be data driven.
 This is the last step we need to do before we get to attention as it is used in Transformers.
 
@@ -142,7 +145,7 @@ We will introduce 3 more vectors and their functions are usually described as fo
 **Value V:** "I don't have a fancy interpretation! :(".  
 
 
-The values of these vectors are nothing more the result of an linear activation of the intermediate result x. Through the multiplication of key and query, the different positions can communicate with one another and result in higher values (indicating higher importance for one another) or lower values (less importance).
+The values of these vectors are nothing more the result of an linear activation of the intermediate result x. Through the multiplication of key and query, the different positions can communicate with one another and result in higher values (indicating higher importance for one another) or lower values (less importance).  
 So, let's write a class for an attention head and add it to our model.
 
 ```python
@@ -186,7 +189,7 @@ class Model(nn.Module):
     logits = fc(x)
 ```
 
-As you can see in the left diagram below, we now created an attention head exactly as described in the paper "Attention is all you need". We did not go into detail with the scaling because it is really just scaling the product of Q and K by $\frac{1}{\sqrt{d}}$, d being the dimension of K.
+As you can see in the left diagram below, we now created an attention head exactly as described in the paper "Attention is all you need". We did not go into detail with the scaling because it is really just scaling the product of Q and K by $$\frac{1}{\sqrt{d}}$$, d being the dimension of K.
 
 
 A Single Attention Head             |  Multi-head Attention
@@ -213,5 +216,5 @@ The softmax function is widely used in Neural Networks. All it does is convert l
 ## Credits
 The sources I used to write this blog are mainly [this YouTube video from Andrej Karpathy](https://www.youtube.com/watch?v=kCc8FmEb1nY) (former AI director of Tesla), some blogs mentioned in-text, and the book "Transformers for Transformers for Natural Language Processing" by Denis Rothman.
 
-If you read until here, thansk, you're awesome! :)
+If you read until here, thanks, you're awesome! :)
 
