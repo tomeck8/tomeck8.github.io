@@ -199,7 +199,17 @@ A Single Attention Head             |  Multi-head Attention
 
 
 ### Multi-Head Attention
-In the right diagram, you can see what a multi-head attention looks like. Actually it is fairly easy. It is nothing else then `num_heads` (an integer of your choice) attention-heads which are calculated independently from one another. The results of all the attention heads are concatenated at the end and then fed into a linear layer.
+In the right diagram, you can see what a multi-head attention looks like. Actually it is fairly easy. It is nothing else then `num_heads` (an integer of your choice) attention-heads which are calculated independently from one another. The results of all the attention heads are concatenated at the end and then fed into a linear layer.  
+Here's one way to program it in Python:
+
+```python
+class MultiHeadAttention(nn.Module):
+  def __init__(self, num_heads, head_size):
+    heads = nn.ModuleList([AttentionHead(head_size) for _ in range(num_heads)])
+  
+  def forward(self):
+    return torch.cat([h(x) for h in heads], dim=-1)
+```
 
 
 ## Residual Blocks
